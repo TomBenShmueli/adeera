@@ -20,5 +20,8 @@
   "homepage": "https://github.com/TomBenShmueli/adeera#readme",
   "engines": {
     "node": "14.15.1"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
   }
 }
