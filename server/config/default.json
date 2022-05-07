@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://adeera-dev:adeera-dev@cluster0.zbb0n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}
