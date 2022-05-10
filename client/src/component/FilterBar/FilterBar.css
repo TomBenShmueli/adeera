@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: end;
+}
+
+.side-bar {
+    position: fixed;
+    margin: 80px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 20%;
+    background-color:#686D76;
+    color: white;
+    overflow: clip;
+}
+
+.center {
+    text-align: center;
+}
