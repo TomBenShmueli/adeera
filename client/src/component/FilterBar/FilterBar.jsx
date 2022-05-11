@@ -4,10 +4,10 @@ import Filter from '../../ui/Filter/Filter';
 import './FilterBar.css';
 
 const FilterBar = () => {
-    const initRoomValues = [30,50]
+    const initRoomValues = [3,5]
     const minRooms=1
-    const maxRooms=90
-    const roomSteps=4
+    const maxRooms=10
+    const roomSteps=1
     return (
         <div className='container'>
             <nav className='side-bar'>
