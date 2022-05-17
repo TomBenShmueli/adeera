@@ -33,7 +33,7 @@ async function getPosts() {
             result = parsedBody['result'];
             //parse results to apartments -->
             parser.parseApts(result);
-
+            
         })
         .catch(function (err) {
             console.log(err);
@@ -44,6 +44,7 @@ module.exports = {
     initScrapingCycle: function () {
         // Connect Database
         //dbModule.connectDB();
+        console.log('init called...')
         getPosts();
         //dbModule.disconnectDB();
     }

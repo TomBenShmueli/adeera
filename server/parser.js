@@ -1,18 +1,13 @@
+const { type } = require('express/lib/response');
 const dbModule = require('./config/db')
 
 module.exports = {
-    parseApts: function (apartmentsJSON) {
+    parseApts: function (apartmentsResult) {        
         try {
-            //extract parameters to new JSON
-            apartmentsJSON.array.forEach(element => {
-                console.log(element)
-                // var jsonToDB = {
-                //     post_id : element.
-                // }
-                dbModule.insertApartment(element);
-            });
+            dbModule.dummyData();
+            
         } catch (err) {
-
+            console.log(err)
         }
     }
 };

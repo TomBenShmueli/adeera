@@ -16,6 +16,7 @@ const connectDB = async () => {
                 useNewUrlParser: true
             }
         );
+
         isDBConnected = true;
         console.log('MongoDB is Connected...');
     } catch (err) {
@@ -33,7 +34,7 @@ const disconnectDB = async () => {
 };
 
 //apartment DB scheme
-const apartmentScheme = new mongoose.Schema({
+const apartmentSchema = new mongoose.Schema({
     post_id: {
         type: String,
         required: [true, "Post ID is missing, cannot register the post"]
@@ -42,7 +43,7 @@ const apartmentScheme = new mongoose.Schema({
         type: String,
         required: [true, "Post text is missing, cannot register the post"]
     },
-    time: {
+    post_date: {
         type: Date,
         required: [true, "Post date is missing, cannot register the post"]
     },
@@ -70,11 +71,31 @@ const apartmentScheme = new mongoose.Schema({
     },
     group_name: {
         type: [{ name: String }]
+    },
+    listing_price: {
+        type: String
     }
 });
 
 //create a new collection
-const Apartment = mongoose.model("Apartment", apartmentScheme);
+const Apartment = mongoose.model("Apartment", apartmentSchema);
+
+const userSchema = new mongoose.Schema({
+
+})
+
+const dummyData = async () => {
+    connectDB();
+    const apartment = new Apartment(
+        {
+            post_id : "1234",
+            text : "text",
+            post_url: "text",
+            post_date: Date.now()      
+        }
+    )
+    apartment.save().then( () => console.log("Hello World!"));
+}
 
 
 const insertUser = async (user) => {
@@ -84,7 +105,6 @@ const insertUser = async (user) => {
 
     } catch (error) {
         //catch and try to re-insert in case of non-fatal error.
-
     }
 }
 
@@ -101,8 +121,9 @@ const insertApartment = async (apartment) => {
 module.exports = {
     connectDB,
     disconnectDB,
-    apartmentScheme,
+    apartmentSchema,
     Apartment,
     insertApartment,
-    insertUser
+    insertUser,
+    dummyData
 }
