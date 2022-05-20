@@ -1,129 +1,167 @@
-
 // db.js
 
-const mongoose = require('mongoose');
-const config = require('config');
+const mongoose = require("mongoose");
+const config = require("config");
 //const log = require('../../errorLog.txt') //place holder for future logging system
 var isDBConnected = false;
 
-
 // connect to db
-const connectDB = async () => {
-    try {
-        await mongoose.connect(
-            "mongodb+srv://adeera-dev:adeera-dev@cluster0.zbb0n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-            {
-                useNewUrlParser: true
-            }
-        );
+const connectDB = () => {
+  try {
+    mongoose.connect(
+      "mongodb+srv://adeera-dev:adeera-dev@cluster0.zbb0n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+      }
+    );
 
-        isDBConnected = true;
-        console.log('MongoDB is Connected...');
-    } catch (err) {
-        console.error(err.message);
-    }
+    isDBConnected = true;
+    console.log("MongoDB is Connected...");
+  } catch (err) {
+    console.error(err.message);
+  }
 };
 
 //disconnect from db
-const disconnectDB = async () => {
-    try {
-        await mongoose.connection.close();
-    } catch (err) {
-        console.error(err.message)
-    }
+const disconnectDB = () => {
+  try {
+    console.log("trying to disconnect...");
+    mongoose.connection.close();
+  } catch (err) {
+    console.error(err.message);
+  }
 };
 
 //apartment DB scheme
 const apartmentSchema = new mongoose.Schema({
-    post_id: {
-        type: String,
-        required: [true, "Post ID is missing, cannot register the post"]
-    },
-    text: {
-        type: String,
-        required: [true, "Post text is missing, cannot register the post"]
-    },
-    post_date: {
-        type: Date,
-        required: [true, "Post date is missing, cannot register the post"]
-    },
-    images: {
-        type: [String]
-    },
-    images_description: {
-        type: [String]
-    },
-    video: {
-        type: String
-    },
-    comments: {
-        type: Number,
-    },
-    post_url: {
-        type: String,
-        required: [true, "Post URL is missing, cannot register the post"]
-    },
-    user_id: {
-        type: String
-    },
-    user_name: {
-        type: String
-    },
-    group_name: {
-        type: [{ name: String }]
-    },
-    listing_price: {
-        type: String
-    }
+  post_id: {
+    type: String,
+    required: [true, "Post ID is missing, cannot register the post"],
+  },
+  text: {
+    type: String,
+    required: [true, "Post text is missing, cannot register the post"],
+  },
+  post_date: {
+    type: Date,
+  },
+  images: {
+    type: [String],
+  },
+  images_description: {
+    type: [String],
+  },
+  video: {
+    type: String,
+  },
+  comments: {
+    type: Number,
+  },
+  post_url: {
+    type: String,
+    required: [true, "Post URL is missing, cannot register the post"],
+  },
+  user_id: {
+    type: String,
+  },
+  user_name: {
+    type: String,
+  },
+  group_name: {
+    type: [{ name: String }],
+  },
+  listing_price: {
+    type: String,
+  },
 });
 
 //create a new collection
 const Apartment = mongoose.model("Apartment", apartmentSchema);
 
-const userSchema = new mongoose.Schema({
-
-})
+const userSchema = new mongoose.Schema({});
 
 const dummyData = async () => {
-    connectDB();
-    const apartment = new Apartment(
-        {
-            post_id : "1234",
-            text : "text",
-            post_url: "text",
-            post_date: Date.now()      
-        }
-    )
-    apartment.save().then( () => console.log("Hello World!"));
-}
+  connectDB();
+  const apartment = new Apartment({
+    post_id: "1234",
+    text: "text",
+    post_url: "text",
+    post_date: Date.now(),
+  });
+  apartment.save().then(() => console.log("Hello World!"));
+};
 
+const ConnectDB = async () => {
+  await mongoose
+    .connect(
+      "mongodb+srv://adeera-dev:adeera-dev@cluster0.zbb0n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+      }
+    )
+    .then(console.log("Mongo DB is connected."));
+  return mongoose;
+};
 
 const insertUser = async (user) => {
+  try {
+    apartment.save().then(() => console.log("Save success"));
+  } catch (error) {
+    //catch and try to re-insert in case of non-fatal error.
+  }
+};
+
+async function saveApartments(apartmentArray) {
+  console.log("trying to connect...");
+  ConnectDB();
+  const Apartment = mongoose.model("Apartment", apartmentSchema);
+
+  for (const apartment of apartmentArray) {
+    let currentApt = new Apartment({
+      post_id: apartment.post_id,
+      text: apartment.text,
+      post_date: apartment.time,
+      images: apartment.images,
+      images_description: apartment.images_description,
+      video: apartment.video,
+      comments: apartment.comments,
+      post_url: apartment.post_url,
+      user_name: apartment.user_name,
+      user_id: apartment.user_id,
+      group_name: apartment.with,
+      listing_price: apartment.listing_price,
+    });
     try {
-
-        apartment.save().then(() => console.log("Save success"));
-
+      console.log(currentApt);
+      await currentApt.save().then("apt " + currentApt.post_id + "saved.");
     } catch (error) {
-        //catch and try to re-insert in case of non-fatal error.
+      console.error(error);
     }
+  }
+
+  DisconnectDB();
 }
 
-const insertApartment = async (apartment) => {
-    try {
-        // insert to DB
+function DisconnectDB() {
+  console.log("trying to disconnect...");
+  mongoose.connection.close();
+  console.log("Mongo DB is disconnected.");
+}
 
-    } catch (error) {
-        //catch and try to re-insert in case of non-fatal error.
-
-    }
+async function getApartments() {
+  ConnectDB();
+  let apartments = Apartment.find();
+  DisconnectDB();
+  return apartments;
 }
 
 module.exports = {
-    connectDB,
-    disconnectDB,
-    apartmentSchema,
-    Apartment,
-    insertApartment,
-    insertUser,
-    dummyData
-}
+  connectDB,
+  disconnectDB,
+  apartmentSchema,
+  Apartment,
+  insertUser,
+  dummyData,
+  saveApartments,
+  getApartments,
+};
