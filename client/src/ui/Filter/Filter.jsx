@@ -5,22 +5,23 @@ import Box from '@mui/material/Box';
 
 
 const Filter = (props) => {
-    console.log(props)
-    const [value, setValue] = useState(props.initValues);
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
+  console.log(props)
+  const [value, setValue] = useState(props.initValues);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
-    <Box>
-        <Slider
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        min={props.minValue}
-        max={props.maxValue}
-        steps={props.steps}
-        />
-    </Box>
+    // <Box sx={{ width: 225 }}>
+    <Slider
+      value={value}
+      onChange={handleChange}
+      valueLabelDisplay="auto"
+      min={props.minValue}
+      max={props.maxValue}
+      steps={props.steps}
+      color="primary"
+    />
+    // </Box>
   )
 }
 
