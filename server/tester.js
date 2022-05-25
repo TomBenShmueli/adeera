@@ -1,4 +1,5 @@
 const parser = require("./parser");
+const db = require("./config/db");
 
 module.exports = {
   testDBSave() {
@@ -9,5 +10,11 @@ module.exports = {
     let jsonArr = [];
     jsonArr.push(rawdata);
     parser.parseApts(jsonArr);
+  },
+  testDBGetCities() {
+    let cursor = db.getGroupName();
+  },
+  testDBGetApartments() {
+    console.log(db.getApartments());
   },
 };

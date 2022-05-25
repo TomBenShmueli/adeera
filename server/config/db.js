@@ -150,16 +150,35 @@ function DisconnectDB() {
 
 async function getApartments() {
   ConnectDB();
-  let apartments = Apartment.find();
+  let apartments = await Apartment.find({}, function (err, docs) {
+    if (!err) {
+      console.log(docs);
+      disconnectDB();
+      return docs;
+    } else {
+      throw err;
+    }
+  });
   DisconnectDB();
   return apartments;
 }
 
 async function getGroupName() {
   ConnectDB();
-  let groupNames = Apartment.group_name.find();
-  DisconnectDB;
-  return groupNames;
+  let groupNames = await Apartment.find(
+    {},
+    { group_name: 1, _id: 0 },
+    function (err, docs) {
+      if (!err) {
+        console.log(docs);
+        disconnectDB();
+        return docs;
+      } else {
+        throw err;
+      }
+    }
+  );
+  DisconnectDB();
 }
 
 module.exports = {
