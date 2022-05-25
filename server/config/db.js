@@ -68,7 +68,7 @@ const apartmentSchema = new mongoose.Schema({
     type: String,
   },
   group_name: {
-    type: [{ name: String }],
+    type: String,
   },
   listing_price: {
     type: String,
@@ -128,11 +128,11 @@ async function saveApartments(apartmentArray) {
       post_url: apartment.post_url,
       user_name: apartment.user_name,
       user_id: apartment.user_id,
-      group_name: apartment.with,
+      group_name: apartment.group_name,
       listing_price: apartment.listing_price,
+      is_live: true,
     });
     try {
-      console.log(currentApt);
       await currentApt.save().then("apt " + currentApt.post_id + "saved.");
     } catch (error) {
       console.error(error);
@@ -155,6 +155,13 @@ async function getApartments() {
   return apartments;
 }
 
+async function getGroupName() {
+  ConnectDB();
+  let groupNames = Apartment.group_name.find();
+  DisconnectDB;
+  return groupNames;
+}
+
 module.exports = {
   connectDB,
   disconnectDB,
@@ -164,4 +171,5 @@ module.exports = {
   dummyData,
   saveApartments,
   getApartments,
+  getGroupName,
 };

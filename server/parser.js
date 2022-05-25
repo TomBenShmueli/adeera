@@ -1,4 +1,4 @@
-const { type } = require("express/lib/response");
+const { type, json } = require("express/lib/response");
 const dbModule = require("./config/db");
 const bodyParser = require("body-parser");
 
@@ -13,6 +13,10 @@ module.exports = {
 
         jsonElement = JSON.parse(stringElement);
         let apt = {};
+        let jsonElementGroupName = undefined;
+        if (jsonElement.with && jsonElement.with.length > 0) {
+          jsonElementGroupName = jsonElement.with[0].name;
+        }
 
         apt.post_id = jsonElement.post_id;
         apt.text = jsonElement.text;
@@ -24,9 +28,11 @@ module.exports = {
         apt.post_url = jsonElement.post_url;
         apt.user_id = jsonElement.user_id;
         apt.user_name = jsonElement.user_name;
-        apt.group_name = jsonElement.group_name;
+        apt.group_name = jsonElementGroupName;
         apt.listing_price = jsonElement.listing_price;
-
+        console.log("apt_groupname" + apt.group_name);
+        console.log("typeof" + typeof apt.group_name);
+        console.log("jsonelementgroupname" + jsonElementGroupName);
         apartments.push(apt);
       });
       console.log("trying to save...");
