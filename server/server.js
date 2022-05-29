@@ -9,6 +9,7 @@ const scraper = require("./scraper");
 const parser = require("./parser");
 const testJSON = require("./config/test.json");
 const tester = require("./tester");
+const nlp = require("./nlp");
 
 //*********************************Application****************/
 
@@ -29,12 +30,15 @@ app.get("api/apartments", (req, res) => {
   res.send(apartments);
 });
 
+// Cities API
+app.get("api/cities", (req, res) => {});
+
 //*********************************General**************************************/
 
 app.listen(port, (req, res) => {});
 
-scraper.initScrapingCycle();
+//scraper.initScrapingCycle();
 
 //*********************************Testers**************************************/
 //tester.testDBSave();
-//tester.testDBGetApartments();
+//tester.testDBGetCities();

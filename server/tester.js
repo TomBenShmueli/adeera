@@ -12,7 +12,7 @@ module.exports = {
     parser.parseApts(jsonArr);
   },
   testDBGetCities() {
-    let cursor = db.getGroupName();
+    console.log(db.getGroupName());
   },
   testDBGetApartments() {
     console.log(db.getApartments());
