@@ -2,20 +2,30 @@
     width: 200px;
     padding: 20px  0px;
     text-align: center;
-    font-size: 22px;
-
     background: #FF9B9B;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     margin-bottom: 25px;
     border: 0px;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height, or 173% */
+    cursor: pointer;
+    letter-spacing: 0.46px;
+    
+}
+.btn-google:active{
+    background: #fb6969;
+    border-color: black;
 }
 
 .btn-facebook{
     width: 200px;
     padding: 20px 0px;
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
+    cursor: pointer;
 
     background: #94BFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
