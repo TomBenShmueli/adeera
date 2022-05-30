@@ -21,6 +21,7 @@ const port = process.env.PORT || 8082;
 // cors
 app.use(cors({ origin: true, credentials: true }));
 
+
 // Init Middleware
 app.use(express.json({ extended: false }));
 
@@ -31,13 +32,13 @@ app.get("api/apartments", (req, res) => {
 });
 
 // Cities API
-app.get("api/cities", (req, res) => {});
+app.get("api/cities", (req, res) => { });
 
 //*********************************General**************************************/
 
-app.listen(port, (req, res) => {});
+app.listen(port, (req, res) => { });
 
-//scraper.initScrapingCycle();
+scraper.initScrapingCycle();
 
 //*********************************Testers**************************************/
 //tester.testDBSave();
