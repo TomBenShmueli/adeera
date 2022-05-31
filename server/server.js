@@ -31,7 +31,9 @@ app.get("api/apartments", (req, res) => {
 });
 
 // Cities API
-app.get("api/cities", (req, res) => {});
+app.get("api/cities", (req, res) => {
+  nlp.getCitiesFromGroups();
+});
 
 //*********************************General**************************************/
 
@@ -42,3 +44,4 @@ app.listen(port, (req, res) => {});
 //*********************************Testers**************************************/
 //tester.testDBSave();
 //tester.testDBGetCities();
+//tester.testAxiosNLPCityName();

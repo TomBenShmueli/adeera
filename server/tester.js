@@ -1,5 +1,6 @@
 const parser = require("./parser");
 const db = require("./config/db");
+const nlp = require("./nlp");
 
 module.exports = {
   testDBSave() {
@@ -16,5 +17,8 @@ module.exports = {
   },
   testDBGetApartments() {
     console.log(db.getApartments());
+  },
+  testAxiosNLPCityName() {
+    console.log(nlp.getCityFromString("רמת גן"));
   },
 };

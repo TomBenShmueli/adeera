@@ -198,7 +198,7 @@ async function getApartments() {
   let apartments = await Apartment.find({}, function (err, docs) {
     if (!err) {
       console.log(docs);
-      disconnectDB();
+      DisconnectDB();
       return docs;
     } else {
       throw err;
@@ -216,7 +216,7 @@ async function getGroupName() {
     function (err, docs) {
       if (!err) {
         console.log(docs);
-        disconnectDB();
+        DisconnectDB();
         return docs;
       } else {
         throw err;
