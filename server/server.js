@@ -44,10 +44,11 @@ app.listen(port, (req, res) => {
   console.log("Server is now running.");
 });
 
-//scraper.initScrapingCycle();
+scraper.initScrapingCycle();
 
-//*********************************Testers**************************************/
+//*********************************Testers*************************************/
 //tester.testDBSave();
 //tester.testDBGetApartments();
 //tester.testDBGetCities();
 //tester.testAxiosNLPCityName();
+//tester.testNumberOfRooms("string", false);

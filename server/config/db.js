@@ -73,50 +73,11 @@ const apartmentSchema = new mongoose.Schema({
   listing_price: {
     type: String,
   },
-});
-
-const apartmentDataSchema = new mongoose.Schema({
-  post_id: {
-    type: String,
-    required: [true, "Post ID is missing, cannot register the post"],
-  },
-  text: {
-    type: String,
-    required: [true, "Post text is missing, cannot register the post"],
-  },
-  post_date: {
-    type: Date,
-  },
-  images: {
-    type: [String],
-  },
-  images_description: {
-    type: [String],
-  },
-  video: {
-    type: String,
-  },
-  comments: {
-    type: Number,
-  },
-  post_url: {
-    type: String,
-    required: [true, "Post URL is missing, cannot register the post"],
-  },
-  user_id: {
-    type: String,
-  },
-  user_name: {
-    type: String,
-  },
-  group_name: {
-    type: String,
-  },
-  listing_price: {
-    type: String,
-  },
   number_of_rooms: {
     type: Number,
+  },
+  city: {
+    type: String,
   },
 });
 
@@ -187,6 +148,8 @@ async function saveApartments(apartmentArray) {
       user_id: apartment.user_id,
       group_name: apartment.group_name,
       listing_price: apartment.listing_price,
+      number_of_rooms: apartment.number_of_rooms,
+      city: apartment.city,
       is_live: true,
     });
     try {
