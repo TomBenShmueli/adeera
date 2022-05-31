@@ -25,21 +25,23 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 
 // Apartment API
-app.get("api/apartments", (req, res) => {
+app.get("/api/apartments", (req, res) => {
   let apartments = db.getApartments();
   res.send(apartments);
 });
 
 // Cities API
-app.get("api/cities", (req, res) => {
+app.get("/api/cities", (req, res) => {
   nlp.getCitiesFromGroups();
 });
 
 //*********************************General**************************************/
 
-app.listen(port, (req, res) => {});
+app.listen(port, (req, res) => {
+  console.log("Server is now running.");
+});
 
-scraper.initScrapingCycle();
+//scraper.initScrapingCycle();
 
 //*********************************Testers**************************************/
 //tester.testDBSave();
