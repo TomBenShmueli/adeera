@@ -49,6 +49,6 @@ app.listen(port, (req, res) => {
 //tester.testDBSave();
 //tester.testDBGetApartments();
 //tester.testDBGetCities();
-//tester.testAxiosNLPCityName();
+tester.testAxiosNLPCityName();
 //tester.testNumberOfRooms("string", false);
-tester.testParser();
+//tester.testParser();

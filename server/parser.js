@@ -39,9 +39,13 @@ module.exports = {
         console.log("jsonelementgroupname" + jsonElementGroupName);
         apartments.push(apt);
       });
-      for (const apartment in apartments) {
-        apartment.city = await this.getCityFromString(apartment.group_name);
+      for (var i = 0; i < apartments.length; i++) {
+        console.log(apartments[i].group_name);
+        apartments[i].city = await nlp.getCityFromString(
+          apartments[i].group_name
+        );
       }
+
       console.log("trying to save...");
       //dbModule.saveApartments(apartments);
     } catch (err) {
