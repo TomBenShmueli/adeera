@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const nlp = require("./nlp");
 
 module.exports = {
-  parseApts: function (apartmentsResult) {
+  parseApts: async function (apartmentsResult) {
     try {
       var apartments = [];
       var Array = apartmentsResult;
@@ -39,11 +39,16 @@ module.exports = {
         console.log("jsonelementgroupname" + jsonElementGroupName);
         apartments.push(apt);
       });
-      console.log(apartments);
+      for (const apartment in apartments) {
+        apartment.city = await this.getCityFromString(apartment.group_name);
+      }
       console.log("trying to save...");
       //dbModule.saveApartments(apartments);
     } catch (err) {
       console.log(err);
     }
+  },
+  getCityFromString: async function (groupName) {
+    return await nlp.getCityFromString(groupName);
   },
 };

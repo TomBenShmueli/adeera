@@ -7,7 +7,6 @@ var cors = require("cors");
 const { spawn } = require("child_process");
 const scraper = require("./scraper");
 const parser = require("./parser");
-const testJSON = require("./config/test.json");
 const tester = require("./tester");
 const nlp = require("./nlp");
 const db = require("./config/db");
@@ -44,7 +43,7 @@ app.listen(port, (req, res) => {
   console.log("Server is now running.");
 });
 
-scraper.initScrapingCycle();
+//scraper.initScrapingCycle();
 
 //*********************************Testers*************************************/
 //tester.testDBSave();
@@ -52,3 +51,4 @@ scraper.initScrapingCycle();
 //tester.testDBGetCities();
 //tester.testAxiosNLPCityName();
 //tester.testNumberOfRooms("string", false);
+tester.testParser();
