@@ -10,6 +10,7 @@ const parser = require("./parser");
 const testJSON = require("./config/test.json");
 const tester = require("./tester");
 const nlp = require("./nlp");
+const db = require("./config/db");
 
 //*********************************Application****************/
 
@@ -25,14 +26,16 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 
 // Apartment API
-app.get("/api/apartments", (req, res) => {
-  let apartments = db.getApartments();
+app.get("/api/apartments", async (req, res) => {
+  let apartments = await db.getApartments();
+  console.log(apartments);
   res.send(apartments);
 });
 
 // Cities API
-app.get("/api/cities", (req, res) => {
-  nlp.getCitiesFromGroups();
+app.get("/api/cities", async (req, res) => {
+  let uniqueCities = nlp.getCitiesFromGroups();
+  res.send(uniqueCities);
 });
 
 //*********************************General**************************************/
@@ -45,5 +48,6 @@ app.listen(port, (req, res) => {
 
 //*********************************Testers**************************************/
 //tester.testDBSave();
+//tester.testDBGetApartments();
 //tester.testDBGetCities();
 //tester.testAxiosNLPCityName();

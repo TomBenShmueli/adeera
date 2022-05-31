@@ -137,6 +137,7 @@ const dummyData = async () => {
 };
 
 const ConnectDB = async () => {
+  console.log("trying to connect...");
   await mongoose
     .connect(
       "mongodb+srv://adeera-dev:adeera-dev@cluster0.zbb0n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
@@ -146,6 +147,17 @@ const ConnectDB = async () => {
     )
     .then(console.log("Mongo DB is connected."));
   return mongoose;
+};
+
+const DisconnectDB = async () => {
+  try {
+    console.log("trying to disconnect...");
+    await mongoose.connection
+      .close()
+      .then(console.log("Mongo DB is disconnected."));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const insertUser = async (user) => {
@@ -187,24 +199,22 @@ async function saveApartments(apartmentArray) {
   DisconnectDB();
 }
 
-function DisconnectDB() {
-  console.log("trying to disconnect...");
-  mongoose.connection.close();
-  console.log("Mongo DB is disconnected.");
-}
-
 async function getApartments() {
   ConnectDB();
   let apartments = await Apartment.find({}, function (err, docs) {
     if (!err) {
-      console.log(docs);
       DisconnectDB();
+      console.log(typeof docs);
       return docs;
     } else {
+      disconnectDB();
       throw err;
     }
-  });
-  DisconnectDB();
+  })
+    .clone()
+    .catch(function (err) {
+      console.log(err);
+    });
   return apartments;
 }
 
@@ -222,7 +232,11 @@ async function getGroupName() {
         throw err;
       }
     }
-  );
+  )
+    .clone()
+    .catch(function (err) {
+      console.log(err);
+    });
   DisconnectDB();
 }
 
