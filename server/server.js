@@ -39,7 +39,7 @@ app.get("api/cities", (req, res) => {
 
 app.listen(port, (req, res) => {});
 
-//scraper.initScrapingCycle();
+scraper.initScrapingCycle();
 
 //*********************************Testers**************************************/
 //tester.testDBSave();

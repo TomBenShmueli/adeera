@@ -11,3 +11,14 @@
     color: white;
     overflow: clip;
 }
+
+.nav-item {
+    margin: 25px;
+}
+
+ .img-item {
+     width: auto;
+     height: 70%;
+     border-radius: 0%;
+     margin: 25px;
+ }
