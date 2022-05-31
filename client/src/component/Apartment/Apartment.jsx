@@ -209,15 +209,16 @@ import Button from '@mui/material/Button';
 const Apartment = (props) => {
 
     const openAptInfo = () => {
-        props.onOpen(props.key, props.username, props.text)
+        props.onOpen(props.key, props.username, props.text, props.image, props.postUrl)
     }
 
     return (
         <Card>
-            <img src={props.image} width="100%" height="170px" />
+            <img src={props.image} width="100%" height="170px" alt="home" />
             <h3 className="title">{props.username}</h3>
-            <p className="content" dir='rtl'>{props.text}</p>
-            <Button variant="contained" className="margin30" onClick={openAptInfo}>מידע נוסף</Button>
+            <p className="content" dir='rtl'>{`${props.text.substring(0, 250)}...`}</p>
+            <Button className="margin30" variant="contained" onClick={openAptInfo}>מידע נוסף</Button>
+
         </Card>
     );
 }

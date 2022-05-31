@@ -1,7 +1,7 @@
 import React from 'react';
 import Filter from '../../ui/Filter/Filter';
 import './FilterBar.css';
-import Stack from '@mui/material/Stack';
+// import Stack from '@mui/material/Stack';
 
 const FilterBar = () => {
     const initRoomValues = [3, 8];

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Slide } from "react-slideshow-image";
 
 import slideImages from "./data";
