@@ -34,7 +34,7 @@ app.get("/api/apartments", async (req, res) => {
 
 // Cities API
 app.get("/api/cities", async (req, res) => {
-  let uniqueCities = nlp.getCitiesFromGroups();
+  let uniqueCities = await nlp.getCitiesFromGroups();
   res.send(uniqueCities);
 });
 

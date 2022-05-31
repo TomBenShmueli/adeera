@@ -12,13 +12,16 @@ module.exports = {
     jsonArr.push(rawdata);
     parser.parseApts(jsonArr);
   },
-  testDBGetCities() {
-    console.log(db.getGroupName());
+  async testDBGetCities() {
+    const x = await db.getGroupName();
+    console.log(x);
   },
-  testDBGetApartments() {
-    console.log(db.getApartments());
+  async testDBGetApartments() {
+    const x = await db.getApartments();
+    console.log(x);
   },
-  testAxiosNLPCityName() {
-    console.log(nlp.getCityFromString("רמת גן"));
+  async testAxiosNLPCityName() {
+    const x = await nlp.getCityFromString("להשכרה ריקות או שותפים בתל אביב");
+    console.log(x);
   },
 };
