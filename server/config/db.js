@@ -84,8 +84,6 @@ const apartmentSchema = new mongoose.Schema({
 //create a new collection
 const Apartment = mongoose.model("Apartment", apartmentSchema);
 
-const userSchema = new mongoose.Schema({});
-
 const dummyData = async () => {
   connectDB();
   const apartment = new Apartment({
@@ -118,14 +116,6 @@ const DisconnectDB = async () => {
       .then(console.log("Mongo DB is disconnected."));
   } catch (error) {
     console.log(error);
-  }
-};
-
-const insertUser = async (user) => {
-  try {
-    apartment.save().then(() => console.log("Save success"));
-  } catch (error) {
-    //catch and try to re-insert in case of non-fatal error.
   }
 };
 
@@ -188,11 +178,9 @@ async function getGroupName() {
     { group_name: 1, _id: 0 },
     function (err, docs) {
       if (!err) {
-        console.log(docs);
-        DisconnectDB();
         return docs;
       } else {
-        throw err;
+        console.log(err);
       }
     }
   )
@@ -201,6 +189,8 @@ async function getGroupName() {
       console.log(err);
     });
   DisconnectDB();
+
+  return groupNames;
 }
 
 module.exports = {
@@ -208,7 +198,6 @@ module.exports = {
   disconnectDB,
   apartmentSchema,
   Apartment,
-  insertUser,
   dummyData,
   saveApartments,
   getApartments,

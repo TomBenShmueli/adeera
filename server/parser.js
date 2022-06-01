@@ -8,7 +8,7 @@ module.exports = {
     try {
       var apartments = [];
       var Array = apartmentsResult;
-      Array.forEach(async (stringElement) => {
+      Array.forEach((stringElement) => {
         //extract data from json result
 
         jsonElement = JSON.parse(stringElement);
@@ -21,6 +21,7 @@ module.exports = {
           }
         }
 
+        //fill data per post
         apt.post_id = jsonElement.post_id;
         apt.text = jsonElement.text;
         apt.post_date = jsonElement.time;
@@ -35,10 +36,12 @@ module.exports = {
         apt.listing_price = jsonElement.listing_price;
         apt.number_of_rooms =
           jsonElement.text == null ? "" : nlp.getHowManyRooms(jsonElement.text);
-        apt.city = "Tel Aviv";
+        apt.city = "";
         console.log("jsonelementgroupname" + jsonElementGroupName);
         apartments.push(apt);
       });
+
+      //Use NLP engine to get the city.
       for (var i = 0; i < apartments.length; i++) {
         console.log(apartments[i].group_name);
         apartments[i].city = await nlp.getCityFromString(
@@ -47,7 +50,7 @@ module.exports = {
       }
 
       console.log("trying to save...");
-      //dbModule.saveApartments(apartments);
+      dbModule.saveApartments(apartments);
     } catch (err) {
       console.log(err);
     }

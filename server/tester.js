@@ -2,29 +2,30 @@ const parser = require("./parser");
 const db = require("./config/db");
 const nlp = require("./nlp");
 const fs = require("fs");
-const fileContents = fs.readFileSync("./dummy.json").toString();
 
 module.exports = {
   testDBSave() {
-    const fs = require("fs");
-    const raw = require("body-parser/lib/types/raw");
-
     let rawdata = fs.readFileSync("config/test.json");
     let jsonArr = [];
     jsonArr.push(rawdata);
     parser.parseApts(jsonArr);
+    console.log("db save test ended");
   },
   async testDBGetCities() {
     const x = await db.getGroupName();
-    console.log(x);
+    console.log("get db groups res: " + x);
   },
   async testDBGetApartments() {
     const x = await db.getApartments();
-    console.log(x);
+    console.log("get db apartments res: " + x);
+  },
+  async testUniqueCitiesAPI() {
+    const x = await nlp.getCitiesFromGroups();
+    console.log("city unique NLP res: " + x);
   },
   async testAxiosNLPCityName() {
     const x = await nlp.getCityFromString("להשכרה ריקות או שותפים בתל אביב");
-    console.log(x);
+    console.log("city NLP res: " + x);
   },
   async testNumberOfRooms(text, isDynamic) {
     let x = text;
@@ -35,6 +36,7 @@ module.exports = {
     console.log(nlp.getHowManyRooms(x));
   },
   async testParser() {
+    const fileContents = fs.readFileSync("./dummy.json").toString();
     let x = fileContents;
     parser.parseApts(x);
   },

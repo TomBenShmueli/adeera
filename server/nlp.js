@@ -1,14 +1,17 @@
 const db = require("./config/db");
 const config = require("./config/requestinfo");
-const axios = require("axios");
+const request = require("request-promise");
+const res = require("express/lib/response");
 
 async function getCitiesFromGroups() {
-  let groupNames = await db.getGroupName();
+  const groupNames = await db.getGroupName();
   let collectedCities = [];
 
   //iterate over all group names
-  for (const groupName in groupNames) {
-    let x = await getCityFromString(groupName);
+  for (let index = 0; index < groupNames.length; index++) {
+    const element = groupNames[index];
+    console.log(element.group_name);
+    let x = await getCityFromString(element.group_name);
     collectedCities.push(x);
   }
 
@@ -18,7 +21,11 @@ async function getCitiesFromGroups() {
 
 async function getCityFromString(string) {
   //prep payload
-  console.log(string);
+  if (string === "undefined") {
+    return;
+  }
+  let result = "";
+  let resultArray = [];
   const postedData = {
     categories: ["מקום"],
     text: string,
@@ -26,22 +33,27 @@ async function getCityFromString(string) {
   };
   //send payload
   try {
-    console.log(postedData);
-    let result = "";
-    axios
-      .post(config.apartmentNLPAPI, postedData)
-      .then((response) => {
-        console.log(response.data[0][0]);
-        let x = response.data[0][0].categories[0]; //check if the NLP engine found a city and return if true
-        if (x === "עיר") {
-          console.log("city found!");
-          console.log(response.data[0][0].entity);
-          result = response.data[0][0].entity;
-        }
-      })
-      .catch((error) => console.log(error));
+    var options = {
+      uri: config.apartmentNLPAPI,
+      method: "POST",
+      json: postedData,
+    };
 
-    console.log(result);
+    await request(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        resultArray = response.body[0];
+        resultArray.forEach((jsonElement) => {
+          if (
+            jsonElement.categories[0] &&
+            jsonElement.categories[0] === "עיר"
+          ) {
+            result = jsonElement.entity;
+          }
+        });
+      } else {
+        console.log(error);
+      }
+    });
     return result;
   } catch (err) {
     console.log(err);
