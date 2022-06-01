@@ -43,13 +43,13 @@ app.listen(port, (req, res) => {
   console.log(`Server is now running on port ${port}.`);
 });
 
-// scraper.initScrapingCycle();
+//scraper.initScrapingCycle();
 
 //*********************************Testers*************************************/
 //tester.testDBSave();
 //tester.testDBGetApartments();
 //tester.testDBGetCities();
-//tester.testUniqueCitiesAPI();
+tester.testUniqueCitiesAPI();
 //tester.testAxiosNLPCityName();
 //tester.testNumberOfRooms("string", false);
 //tester.testParser();

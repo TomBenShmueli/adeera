@@ -4,7 +4,7 @@ import json
 import json
 
 
-groupurls = ['groups/ApartmentsTelAviv']
+groupurls = ['groups/253957624766723']
 # , 'groups/287564448778602', 'groups/1424244737803677', 'groups/1068642559922565',
 #              'groups/253957624766723', 'groups/2092819334342645/', 'groups/1529488140613580', 'groups/RentinTLV',
 #              'groups/119965198095838', 'groups/426607440821568', 'groups/550870795608828'
