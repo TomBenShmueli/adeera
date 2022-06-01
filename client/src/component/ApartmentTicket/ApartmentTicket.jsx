@@ -1,6 +1,6 @@
 import React from 'react';
 import Dialog from '../../ui/Dialog/Dialog';
-import Slideshow from '../../ui/Slideshow/Slideshow';
+// import Slideshow from '../../ui/Slideshow/Slideshow';
 import Button from '@mui/material/Button';
 import './ApartmentTicket.css';
 
@@ -9,6 +9,10 @@ const ApartmentTicket = (props) => {
 
     const closeAptInfo = () => {
         props.onClose(props.key);
+    }
+
+    const openFacebook = () => {
+        window.open(props.postUrl);
     }
 
     return (
@@ -21,9 +25,9 @@ const ApartmentTicket = (props) => {
                     </div>
                 </div>
                 <div className="grid-item2">
-                    <img src={props.image} className="images" />
+                    <img src={props.image} className="images" alt="home22" />
                     <div className="flex-container">
-                        <Button variant="contained">massnger</Button>
+                        <Button variant="contained" onClick={openFacebook}>messenger</Button>
                         <Button variant="contained" color="success">WhatsApp</Button>
                         <Button variant="contained" color="secondary" >Phone Call</Button>
                     </div>

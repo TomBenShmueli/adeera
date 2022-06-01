@@ -27,7 +27,7 @@ app.use(express.json({ extended: false }));
 // Apartment API
 app.get("/api/apartments", async (req, res) => {
   let apartments = await db.getApartments();
-  console.log(apartments);
+  // console.log(apartments);
   res.send(apartments);
 });
 
@@ -40,10 +40,10 @@ app.get("/api/cities", async (req, res) => {
 //*********************************General**************************************/
 
 app.listen(port, (req, res) => {
-  console.log("Server is now running.");
+  console.log(`Server is now running on port ${port}.`);
 });
 
-//scraper.initScrapingCycle();
+// scraper.initScrapingCycle();
 
 //*********************************Testers*************************************/
 //tester.testDBSave();
