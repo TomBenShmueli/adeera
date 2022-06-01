@@ -37,13 +37,11 @@ module.exports = {
         apt.number_of_rooms =
           jsonElement.text == null ? "" : nlp.getHowManyRooms(jsonElement.text);
         apt.city = "";
-        console.log("jsonelementgroupname" + jsonElementGroupName);
         apartments.push(apt);
       });
 
       //Use NLP engine to get the city.
       for (var i = 0; i < apartments.length; i++) {
-        console.log(apartments[i].group_name);
         apartments[i].city = await nlp.getCityFromString(
           apartments[i].group_name
         );

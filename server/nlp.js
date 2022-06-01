@@ -10,7 +10,6 @@ async function getCitiesFromGroups() {
   //iterate over all group names
   for (let index = 0; index < groupNames.length; index++) {
     const element = groupNames[index];
-    console.log(element.group_name);
     let x = await getCityFromString(element.group_name);
     collectedCities.push(x);
   }

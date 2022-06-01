@@ -156,18 +156,16 @@ async function getApartments() {
   ConnectDB();
   let apartments = await Apartment.find({}, function (err, docs) {
     if (!err) {
-      DisconnectDB();
-      console.log(typeof docs);
       return docs;
     } else {
-      disconnectDB();
-      throw err;
+      console.log(err);
     }
   })
     .clone()
     .catch(function (err) {
       console.log(err);
     });
+  DisconnectDB();
   return apartments;
 }
 

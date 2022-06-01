@@ -26,15 +26,25 @@ app.use(express.json({ extended: false }));
 
 // Apartment API
 app.get("/api/apartments", async (req, res) => {
-  let apartments = await db.getApartments();
-  // console.log(apartments);
-  res.send(apartments);
+  try {
+    console.log("apartments API called.");
+    let apartments = await db.getApartments();
+    console.log(apartments);
+    res.send(apartments);
+    console.log("apartments API call complete.");
+  } catch (err) {
+    console.log("err occurred while trying to get apartments.");
+  }
 });
 
 // Cities API
 app.get("/api/cities", async (req, res) => {
-  let uniqueCities = await nlp.getCitiesFromGroups();
-  res.send(uniqueCities);
+  try {
+    console.log("unique cities API called");
+    let uniqueCities = await nlp.getCitiesFromGroups();
+    res.send(uniqueCities);
+    console.log("unique cities API call complete");
+  } catch (error) {}
 });
 
 //*********************************General**************************************/
@@ -49,7 +59,7 @@ app.listen(port, (req, res) => {
 //tester.testDBSave();
 //tester.testDBGetApartments();
 //tester.testDBGetCities();
-tester.testUniqueCitiesAPI();
+//tester.testUniqueCitiesAPI();
 //tester.testAxiosNLPCityName();
 //tester.testNumberOfRooms("string", false);
 //tester.testParser();
