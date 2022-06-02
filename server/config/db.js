@@ -25,8 +25,8 @@ const connectDB = () => {
 //disconnect from db
 const disconnectDB = () => {
   try {
-    console.log("trying to disconnect...");
-    mongoose.connection.close();
+    //console.log("trying to disconnect...");
+    //mongoose.connection.close();
   } catch (err) {
     console.error(err.message);
   }

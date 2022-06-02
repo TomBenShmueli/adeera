@@ -15,8 +15,14 @@ import Axios from 'axios';
 const serverAPIPort = 8082;
 const host = 'http://localhost'
 const APIDomain = 'apartments';
+const APIDomain2 = 'cities';
+
 const APIPath = `/api/${APIDomain}`;
+const APIPath2 = `/api/${APIDomain2}`;
+
 const APIRootPath = `${host}:${serverAPIPort}${APIPath}`;
+const APIRootPath2 = `${host}:${serverAPIPort}${APIPath2}`;
+
 // const staticsPort = 3000;
 // const staticsUrl = `${host}:${staticsPort}/`;
 
@@ -29,12 +35,17 @@ const Stage = () => {
     const [image, setImage] = useState('');
     const [postUrl, setPostUrl] = useState('')
     const [apartmentsArray, setApartmentArray] = useState(false);
+    const [cities,setCities] = useState(false);
 
     useEffect(() => {
         Axios.get(APIRootPath)
             .then((res) => {
                 setApartmentArray(res.data);
             });
+        // Axios.get(APIRootPath2)
+        //     .then((res) => {
+        //         setCities(res.data);
+        //     });
     }, []);
 
 
@@ -65,9 +76,10 @@ const Stage = () => {
             <div className='stage'>
                 <div className="cards">
                     {apartmentsArray ? apartmentsArray.map((apt, index) => {
-                        return (
-                            <Apartment key={index} image={apt.images[0]} username={apt.user_name} text={apt.text} postUrl={apt.post_url} onOpen={openApartmentInfo} />
-                        )
+                            return (
+                                <Apartment key={index} image={apt.images[0]} username={apt.user_name} text={apt.text} postUrl={apt.post_url} onOpen={openApartmentInfo} />
+                            )
+                        
                     }) : <h2>Loading...</h2>}
                 </div>
             </div>

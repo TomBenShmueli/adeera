@@ -10,6 +10,8 @@ import Cookies from 'js-cookie';
 function App() {
   const [data, setData] = useState(null);
   const [logged,setLogged] = useState(false);
+  const [minRooms,setMinRooms] = useState(3);
+  const [maxRooms,setMaxRooms] = useState(8);
   const readCookie = () =>{
     const user = Cookies.get("user");
     if(user)
@@ -43,8 +45,8 @@ function App() {
     return(
       <div>
       <TopBar setLogged={setLogged} />
-      <FilterBar />
-      <Stage />
+      <FilterBar minRooms={minRooms} setMinRooms={setMinRooms} maxRooms={maxRooms} setMaxRooms={setMaxRooms} />
+      <Stage  />
       </div>
 
     )
