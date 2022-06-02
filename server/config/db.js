@@ -120,7 +120,6 @@ const DisconnectDB = async () => {
 };
 
 async function saveApartments(apartmentArray) {
-  console.log("trying to connect...");
   ConnectDB();
   const Apartment = mongoose.model("Apartment", apartmentSchema);
 

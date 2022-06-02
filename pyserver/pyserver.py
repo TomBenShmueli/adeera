@@ -24,27 +24,11 @@ def getPosts():
                 post, indent=4, sort_keys=True, default=str))
     return jsonOutput
 
-    #         jsonOutput.append(json.dumps(
-    #             my_json, ensure_ascii=False, indent=4))
-    # jsonOutput.append(']}')
-    # x = requests.post('https://herokuapp.adeera.com/posts', data=jsonOutput)
-    # print(jsonOutput)
-    # return jsonOutput
-
 
 @app.route('/get_posts', methods=['POST'])
 def get_posts():
     data = getPosts()
     return json.dumps({"result": data})
-    # data = request.get_json()
-    # print(data)
-
-    # Data variable contains the
-    # data from the node server
-    # ls = data['array']
-    # result = sum(ls)  # calculate the sum
-
-    # Return data in json format
 
 
 if __name__ == "__main__":
