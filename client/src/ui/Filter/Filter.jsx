@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Filter.css';
 import Slider from '@mui/material/Slider';
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 
 
 const Filter = (props) => {

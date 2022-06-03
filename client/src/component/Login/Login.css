@@ -1,0 +1,33 @@
+
+.login{
+    background-color: #f3f2f2;
+    
+}
+.login-bar{
+    height: 150px;
+    background: #373A40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.login-logo{
+    height: 90%;
+    width: auto;
+    border-radius: 0%;
+}
+.sign-in-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 200px 0;
+    width: 100%;
+}
+.sign-in-form{
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-evenly;
+    background: #E7E7E7;
+    border-radius: 40px;
+    width: 20%;
+}
