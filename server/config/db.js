@@ -25,8 +25,8 @@ const connectDB = () => {
 //disconnect from db
 const disconnectDB = () => {
   try {
-    console.log("trying to disconnect...");
-    mongoose.connection.close();
+    //console.log("trying to disconnect...");
+    //mongoose.connection.close();
   } catch (err) {
     console.error(err.message);
   }
@@ -68,17 +68,21 @@ const apartmentSchema = new mongoose.Schema({
     type: String,
   },
   group_name: {
-    type: [{ name: String }],
+    type: String,
   },
   listing_price: {
+    type: String,
+  },
+  number_of_rooms: {
+    type: Number,
+  },
+  city: {
     type: String,
   },
 });
 
 //create a new collection
 const Apartment = mongoose.model("Apartment", apartmentSchema);
-
-const userSchema = new mongoose.Schema({});
 
 const dummyData = async () => {
   connectDB();
@@ -92,6 +96,7 @@ const dummyData = async () => {
 };
 
 const ConnectDB = async () => {
+  console.log("trying to connect...");
   await mongoose
     .connect(
       "mongodb+srv://adeera-dev:adeera-dev@cluster0.zbb0n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
@@ -103,16 +108,18 @@ const ConnectDB = async () => {
   return mongoose;
 };
 
-const insertUser = async (user) => {
+const DisconnectDB = async () => {
   try {
-    apartment.save().then(() => console.log("Save success"));
+    console.log("trying to disconnect...");
+    await mongoose.connection
+      .close()
+      .then(console.log("Mongo DB is disconnected."));
   } catch (error) {
-    //catch and try to re-insert in case of non-fatal error.
+    console.log(error);
   }
 };
 
 async function saveApartments(apartmentArray) {
-  console.log("trying to connect...");
   ConnectDB();
   const Apartment = mongoose.model("Apartment", apartmentSchema);
 
@@ -128,11 +135,13 @@ async function saveApartments(apartmentArray) {
       post_url: apartment.post_url,
       user_name: apartment.user_name,
       user_id: apartment.user_id,
-      group_name: apartment.with,
+      group_name: apartment.group_name,
       listing_price: apartment.listing_price,
+      number_of_rooms: apartment.number_of_rooms,
+      city: apartment.city,
+      is_live: true,
     });
     try {
-      console.log(currentApt);
       await currentApt.save().then("apt " + currentApt.post_id + "saved.");
     } catch (error) {
       console.error(error);
@@ -142,17 +151,43 @@ async function saveApartments(apartmentArray) {
   DisconnectDB();
 }
 
-function DisconnectDB() {
-  console.log("trying to disconnect...");
-  mongoose.connection.close();
-  console.log("Mongo DB is disconnected.");
-}
-
 async function getApartments() {
   ConnectDB();
-  let apartments = Apartment.find();
+  let apartments = await Apartment.find({}, function (err, docs) {
+    if (!err) {
+      return docs;
+    } else {
+      console.log(err);
+    }
+  })
+    .clone()
+    .catch(function (err) {
+      console.log(err);
+    });
   DisconnectDB();
   return apartments;
+}
+
+async function getGroupName() {
+  ConnectDB();
+  let groupNames = await Apartment.find(
+    {},
+    { group_name: 1, _id: 0 },
+    function (err, docs) {
+      if (!err) {
+        return docs;
+      } else {
+        console.log(err);
+      }
+    }
+  )
+    .clone()
+    .catch(function (err) {
+      console.log(err);
+    });
+  DisconnectDB();
+
+  return groupNames;
 }
 
 module.exports = {
@@ -160,8 +195,8 @@ module.exports = {
   disconnectDB,
   apartmentSchema,
   Apartment,
-  insertUser,
   dummyData,
   saveApartments,
   getApartments,
+  getGroupName,
 };

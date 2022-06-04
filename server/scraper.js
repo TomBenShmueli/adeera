@@ -2,6 +2,7 @@ const dbModule = require("./config/db");
 const parser = require("./parser");
 var cors = require("cors");
 var request = require("request-promise");
+var cron = require("node-cron");
 
 async function getPosts() {
   // This variable contains the data
@@ -36,11 +37,8 @@ async function getPosts() {
 }
 
 module.exports = {
-  initScrapingCycle: function () {
-    // Connect Database
-    //dbModule.connectDB();
-    console.log("init called...");
+  initScrapingCycle() {
+    console.log("scraping initiated!");
     getPosts();
-    //dbModule.disconnectDB();
   },
 };
