@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    
+}
+
+.side-bar {
+    position: fixed;
+    margin:80px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px;
+    flex-direction: row-reverse;
+    justify-content: center;
+    height: 100%;
+    width: 18.2%;
+    background-color:#808794; /* 686D76 808794*/
+    color: white;
+    overflow: clip;
+
+    align-content: flex-start;
+}
+
+.filter{
+    flex-basis: 80%;
+    align-self: start;
+}
+
+.center {
+    text-align: center;
+}
